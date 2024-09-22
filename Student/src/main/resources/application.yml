@@ -1,0 +1,37 @@
+server:
+  port: 8090
+
+
+#spring properties
+spring:
+  application:
+    #display name in Eureka
+    name: students
+  #idk why...
+  config:
+    import: optional:configserver:http://localhost:8888
+  #postgresql connecting
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/students
+    username: postgres
+    password: bestuser
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+#for discovery service
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
